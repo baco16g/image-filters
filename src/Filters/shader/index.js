@@ -5,8 +5,8 @@ export const bilateral = `
   #endif
 
   #define SIGMA 5.0
-  #define BSIGMA 0.2
-  #define MSIZE 7
+  #define BSIGMA 0.3
+  #define MSIZE 5
 
   varying vec2 vTextureCoord;
   uniform sampler2D uSampler;
@@ -56,7 +56,7 @@ export const bilateral = `
 
     gl_FragColor = vec4(final_color/Z, 1.0);
   }
-`
+`;
 
 // Portiert von https://github.com/MzHub/gpuakf/blob/master/glsl/kuwahara.glsl
 export const kuwahara = `
@@ -141,4 +141,4 @@ export const kuwahara = `
       }
     }
   }
-`
+`;

@@ -9,6 +9,7 @@ const initialCanvasSize = { width: 500, height: 500 }
 export default function Filter() {
   const [canvasSize, setCanvasSize] = useState(initialCanvasSize)
   const [base64, setBase64] = useState<string | null>(null)
+  const [pile, setPile] = useState<number>(1)
   const { KuwaharaFilter, BilateralFilter } = useFilter({ ...canvasSize })
 
   const handleFiles = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +37,11 @@ export default function Filter() {
     download(_base64, 'image.jpg')
   }, [])
 
+  const handlePile = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value
+    setPile(+value)
+  }, [])
+
   const downloadButton = useMemo(
     () => (
       <DownloadSection>
@@ -50,6 +56,9 @@ export default function Filter() {
       <Container>
         <InputSection>
           <input type="file" accept="image/*" onChange={handleFiles} />
+          <label>
+            Pile: <input type="range" min="1" max="10" value={pile} onChange={handlePile} />
+          </label>
         </InputSection>
         <FiltersSection>
           <FilterSection>
@@ -59,14 +68,16 @@ export default function Filter() {
           <FilterSection>
             <h2>Kuwahara Filter</h2>
             <Stage {...canvasSize}>
-              {base64 && <Sprite image={base64} filters={[KuwaharaFilter]} {...canvasSize} />}
+              {base64 && <Sprite image={base64} filters={[...Array(pile)].map(() => KuwaharaFilter)} {...canvasSize} />}
             </Stage>
             {base64 && downloadButton}
           </FilterSection>
           <FilterSection>
             <h2>Bilateral Filter</h2>
             <Stage {...canvasSize}>
-              {base64 && <Sprite image={base64} filters={[BilateralFilter]} {...canvasSize} />}
+              {base64 && (
+                <Sprite image={base64} filters={[...Array(pile)].map(() => BilateralFilter)} {...canvasSize} />
+              )}
             </Stage>
             {base64 && downloadButton}
           </FilterSection>
