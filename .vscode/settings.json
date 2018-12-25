@@ -1,0 +1,11 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "tslint.autoFixOnSave": true,
+  "tslint.ignoreDefinitionFiles": true,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.printWidth": 120,
+  "prettier.trailingComma": "es5"
+}
