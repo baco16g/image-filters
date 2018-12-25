@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Image-Filters
 
+## DEMO
+
+https://baco16g.github.io/image-filters/
+
 ## Usage
 
 ```zsh
