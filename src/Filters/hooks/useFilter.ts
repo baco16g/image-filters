@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js'
-import { useCallback, useMemo } from 'react'
-import { kuwahara } from '../shader'
+import { useMemo } from 'react'
+import { bilateral, kuwahara } from '../shader'
 
 interface Props {
   width: number
@@ -19,8 +19,10 @@ export default function useFilter({ width, height }: Props) {
   )
 
   const KuwaharaFilter = useMemo(() => new PIXI.Filter('', kuwahara, uniforms), [uniforms])
+  const BilateralFilter = useMemo(() => new PIXI.Filter('', bilateral, uniforms), [uniforms])
 
   return {
     KuwaharaFilter,
+    BilateralFilter,
   }
 }

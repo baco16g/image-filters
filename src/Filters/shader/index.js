@@ -5,8 +5,8 @@ export const bilateral = `
   #endif
 
   #define SIGMA 5.0
-  #define BSIGMA 0.6
-  #define MSIZE 2
+  #define BSIGMA 0.2
+  #define MSIZE 7
 
   varying vec2 vTextureCoord;
   uniform sampler2D uSampler;
@@ -24,7 +24,7 @@ export const bilateral = `
 
   void main(void)
   {
-    vec3 c = texture2D( uSampler, vTextureCoord).rgb;
+    vec3 c = texture2D(uSampler, vTextureCoord).rgb;
 
     //declare stuff
     const int kSize = (MSIZE-1)/2;
@@ -47,7 +47,7 @@ export const bilateral = `
     {
       for (int j=-kSize; j <= kSize; ++j)
       {
-        cc = texture2D(uSampler, vec2(0.0, 0.0) + ( gl_FragCoord.xy + vec2(float(i),float(j)) ) / resolution.xy ).rgb;
+        cc = texture2D(uSampler, vec2(0.0, 0.0) + ( vTextureCoord + vec2(float(i),float(j)) / resolution ) ).rgb;
         factor = normpdf3(cc-c, BSIGMA)*bZ*kernel[kSize+j]*kernel[kSize+i];
         Z += factor;
         final_color += factor*cc;

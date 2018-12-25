@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import reset from 'styled-reset'
-import KuwaharaFilter from './Kuwahara-Filter'
+import Filters from './Filters'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -18,8 +18,8 @@ const Title = styled.h1`
 export default function App() {
   return (
     <>
-      <Title>Kuwahara Filter</Title>
-      <KuwaharaFilter />
+      <Title>Image Filters</Title>
+      <Filters />
     </>
   )
 }

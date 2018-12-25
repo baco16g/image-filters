@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Kuwahara-Filter
+# Image-Filters
 
 ## Usage
 
@@ -26,6 +26,7 @@ $ npm start # open http://localhost:3000
 ## Reference material
 
 * [Kuwahara totale Varianz | Shadertoy BETA](https://www.shadertoy.com/view/ldKBDm)
+* [Bilateral filter | Shadertoy BETA](https://www.shadertoy.com/view/4dfGDH)
 
 ## Author
 
