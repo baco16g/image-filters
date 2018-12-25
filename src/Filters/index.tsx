@@ -2,7 +2,7 @@ import { Sprite, Stage } from '@inlet/react-pixi'
 import React, { ChangeEvent, SyntheticEvent, useCallback, useMemo, useState } from 'react'
 import { convertBlobToBase64, download, getAspectRatioOfBase64 } from '../utils'
 import useFilter from './hooks/useFilter'
-import { Container, DownloadSection, FiltersSection, InputSection } from './styled'
+import { Container, DownloadSection, FilterSection, FiltersSection, InputSection } from './styled'
 
 const initialCanvasSize = { width: 500, height: 500 }
 
@@ -52,24 +52,24 @@ export default function Filter() {
           <input type="file" accept="image/*" onChange={handleFiles} />
         </InputSection>
         <FiltersSection>
-          <section>
+          <FilterSection>
             <h2>Before</h2>
             <Stage {...canvasSize}>{base64 && <Sprite image={base64} {...canvasSize} />}</Stage>
-          </section>
-          <section>
+          </FilterSection>
+          <FilterSection>
             <h2>Kuwahara Filter</h2>
             <Stage {...canvasSize}>
               {base64 && <Sprite image={base64} filters={[KuwaharaFilter]} {...canvasSize} />}
             </Stage>
             {base64 && downloadButton}
-          </section>
-          <section>
+          </FilterSection>
+          <FilterSection>
             <h2>Bilateral Filter</h2>
             <Stage {...canvasSize}>
               {base64 && <Sprite image={base64} filters={[BilateralFilter]} {...canvasSize} />}
             </Stage>
             {base64 && downloadButton}
-          </section>
+          </FilterSection>
         </FiltersSection>
       </Container>
     </>

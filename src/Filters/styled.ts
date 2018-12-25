@@ -14,6 +14,10 @@ export const FiltersSection = styled.div`
   }
 `
 
+export const FilterSection = styled.section`
+  padding: 40px 0;
+`
+
 export const DownloadSection = styled.div`
   margin-top: 10px;
 `
