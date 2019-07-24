@@ -1,6 +1,6 @@
 import { Sprite, Stage } from '@inlet/react-pixi'
-import React, { ChangeEvent, SyntheticEvent, useCallback, useMemo, useState } from 'react'
-import { convertBlobToBase64, download, getAspectRatioOfBase64 } from '../utils'
+import React, { ChangeEvent, SyntheticEvent, useCallback, useMemo, useRef, useState } from 'react'
+import { convertBase64ToBlob, convertBlobToBase64, download, getAspectRatioOfBase64 } from '../utils'
 import useFilter from './hooks/useFilter'
 import { Container, DownloadSection, FilterSection, FiltersSection, InputSection } from './styled'
 
@@ -11,6 +11,7 @@ export default function Filter() {
   const [base64, setBase64] = useState<string | null>(null)
   const [pile, setPile] = useState<number>(1)
   const { KuwaharaFilter, BilateralFilter } = useFilter({ ...canvasSize })
+  const stagetEl = useRef<any>(null)
 
   const handleFiles = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.prototype.slice.call(event.target.files)
@@ -27,14 +28,13 @@ export default function Filter() {
   }, [])
 
   const handleDownload = useCallback((event: SyntheticEvent<HTMLButtonElement>) => {
-    const stageElement: any = event.currentTarget.previousElementSibling
+    const stageElement = stagetEl.current
     if (!stageElement) {
       alert('Download failed')
       return
     }
     const app = stageElement.app
-    const _base64 = app.renderer.plugins.extract.base64(app.stage)
-    download(_base64, 'image.jpg')
+    download(convertBase64ToBlob(app.renderer.plugins.extract.base64(app.stage), 'image/jpeg'), 'image.jpg')
   }, [])
 
   const handlePile = useCallback((event: ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +67,7 @@ export default function Filter() {
           </FilterSection>
           <FilterSection>
             <h2>Kuwahara Filter</h2>
-            <Stage {...canvasSize}>
+            <Stage {...canvasSize} ref={stagetEl}>
               {base64 && <Sprite image={base64} filters={[...Array(pile)].map(() => KuwaharaFilter)} {...canvasSize} />}
             </Stage>
             {base64 && downloadButton}
