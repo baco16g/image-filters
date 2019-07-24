@@ -10,6 +10,7 @@
     "@types/react": "16.7.17",
     "@types/react-dom": "16.0.11",
     "@types/styled-components": "^4.1.4",
+    "canvas-toBlob": "^1.0.0",
     "file-saver": "^2.0.2",
     "pixi.js": "^4.8.4",
     "react": "^16.7.0-alpha.2",

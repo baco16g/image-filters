@@ -1,6 +1,8 @@
 import { Sprite, Stage } from '@inlet/react-pixi'
+import 'canvas-toBlob'
+import { saveAs } from 'file-saver'
 import React, { ChangeEvent, SyntheticEvent, useCallback, useMemo, useRef, useState } from 'react'
-import { convertBase64ToBlob, convertBlobToBase64, download, getAspectRatioOfBase64 } from '../utils'
+import { convertBlobToBase64, getAspectRatioOfBase64 } from '../utils'
 import useFilter from './hooks/useFilter'
 import { Container, DownloadSection, FilterSection, FiltersSection, InputSection } from './styled'
 
@@ -34,7 +36,10 @@ export default function Filter() {
       return
     }
     const app = stageElement.app
-    download(convertBase64ToBlob(app.renderer.plugins.extract.base64(app.stage), 'image/jpeg'), 'image.jpg')
+    const canvas = app.renderer.plugins.extract.canvas(app.stage) as HTMLCanvasElement
+    canvas.toBlob(blob => {
+      blob ? saveAs(blob, 'image.jpg') : alert('Download failed')
+    }, 'image/jpeg')
   }, [])
 
   const handlePile = useCallback((event: ChangeEvent<HTMLInputElement>) => {

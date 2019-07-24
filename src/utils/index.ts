@@ -38,7 +38,3 @@ export const getAspectRatioOfBase64 = (base64: string): Promise<number> =>
     }
     image.src = base64
   })
-
-export const download = (blob: Blob, filename: string) => {
-  saveAs(blob, filename)
-}
