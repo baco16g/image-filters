@@ -12,7 +12,7 @@
     "@types/styled-components": "^4.1.4",
     "canvas-toBlob": "^1.0.0",
     "file-saver": "^2.0.2",
-    "pixi.js": "^4.8.4",
+    "pixi.js": "^4.8.8",
     "react": "^16.7.0-alpha.2",
     "react-dom": "^16.7.0-alpha.2",
     "react-scripts": "2.1.1",
